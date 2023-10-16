@@ -1,0 +1,75 @@
+﻿@using Productify.Domain.Entities;
+@model List<Product>
+
+@{
+}
+
+<h1>Product GetAll Page</h1>
+
+<div class="">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3 text-right">
+            <button class="btn btn-primary btn-block" onclick="checkDisplay()">Yeni Ürün Ekle</button>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal" style="display:none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Yeni Ürün Ekle</h5>
+                    <button type="button" class="close" onclick="checkDisplay()" data-dismiss="modal">&times;</button>
+                </div>
+                <form method="post" action="/Product/AddProduct">
+                    <div class="modal-body">
+                        <label>Enter Product Name : </label>
+                        <input name="productName"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="checkDisplay()" data-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mt-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Product Name</th>
+                    <th>Create Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.CreatedOn</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+
+
+<script>
+    function checkDisplay() {
+        var modal = document.getElementById("myModal");
+
+        if (modal.style.display == "block")
+            modal.style.display = "none";
+        else
+            modal.style.display = "block";
+    }
+</script>
